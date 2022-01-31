@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>TAsk Matter</title>
+<title>Atualizar informações</title>
 {% endblock %}
 
 {% block body %}
@@ -10,8 +10,12 @@
 
 
     <form action="/update/{{task.id}}" method="POST">
-        <input type="text" name="content" id="content" value = "{{task.content }}" >
-        <input type="submit" value="Update">
+          <span>Tarefa</span>
+            <input type="text" name="content" id="content">
+            <br>
+            <span>Email</span>
+             <input type="email" name="email" id="email">
+            <input type="submit" style="align-content: center" value="Atualizar">
     </form>
 </div>
 {% endblock %}

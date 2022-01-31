@@ -1,40 +1,49 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>TAsk Matter</title>
+<title>Task Master</title>
 {% endblock %}
 
 {% block body %}
-    <div class="content">
-        <h1>Task Master</h1>
-        {% if tasks|length<1 %}
-            <h4 style="text-align: center">Nenhuma tarefa para exibir. Add uma antes! </h4>
-
-        {% else %}
-        <table>
+<div class="content">
+    <h1 style="text-align: center">Organizador de Tarefas</h1>
+    {% if dados|length < 1 %}
+    <h4 style="text-align: center">Ainda não há nenhuma tarefa!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Tarefa</th>
+            <th>Email</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+        {% for dado in dados %}
             <tr>
-                <th>Task</th>
-                <th>Added</th>
-                <th>Actions</th>
+                <td>{{ dado.content }}</td>
+                <td>{{ dado.email}}</td>
+                 <td>{{ dado.date_created.date() }}</td>
+                <td>
+
+                    <button><a href="/delete/{{dado.id}}">Apagar</a>
+                    <br>
+                    <button><a href="/update/{{dado.id}}">Atualizar</a>
+                    <br>
+                    <button><a href="/sendmail/{{dado.id}}">Enviar</a>
+                </td>
             </tr>
-            {% for task in tasks %}
-                <tr>
-                    <td>{{task.content}}</td>
-                    <td>{{task.date_created.date()}}</td>
-                    <td>
-                        <a href="/delete/{{task.id}}">Delete</a>
-                        <br>
-                        <a href="/update/{{task.id}}">Update</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
+        {% endfor %}
+    </table>
+    {% endif %}
 
-        {% endif %}
-
+    <div class="form">
         <form action="/" method="POST">
+            <span>Tarefa</span>
             <input type="text" name="content" id="content">
-            <input type="submit" value="Add Task">
+            <br>
+            <span>Email</span>
+             <input type="email" name="email" id="email">
+            <input type="submit" style="align-content: center" value="Add Task">
         </form>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
