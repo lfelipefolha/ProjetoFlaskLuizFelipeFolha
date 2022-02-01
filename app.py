@@ -97,6 +97,7 @@ def update(id):
 #função utilizada para enviar os emails
 @app.route("/sendmail/<int:id>")
 def sendmail(id):
+        # Lista de frases motivacionais
         lista =["Se não houver vento, reme.",
             "Não limite seus desafios. Desafie seus limites.",
             "Minha missão na vida não é apenas sobreviver, mas prosperar.",
@@ -106,11 +107,12 @@ def sendmail(id):
             "Disciplina é a ponte entre metas e realizações.",
             "Sorte é o que acontece quando a preparação encontra a oportunidade.",
             "Eu faço da dificuldade a minha motivação. A volta por cima vem na continuação."]
+        #Seleciona uma frase alatória na lista
         frase = random.choice(lista)
         #através da id são obtidos os dados de tarefa e endereço de email
         task_to_send = Todo.query.filter_by ( id = id ).first ()
         recipients = task_to_send.email #destinatário
-        body = (str(task_to_send.content) + "\nFrase do dia: " +  str(frase))  #tarefa
+        body = (str(task_to_send.content) + "\n \n Frase do dia: " +  str(frase) + "\n\n Prazo:  " + str(task_to_send.prazo) )  #tarefa
 
         #aqui é realizada a definição do email a ser enviado
         msg = Message(subject="Projeto de organização de tarefas",
