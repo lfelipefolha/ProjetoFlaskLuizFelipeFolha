@@ -12,9 +12,10 @@
     {% else %}
     <table>
         <tr>
-            <th>Tarefa</th>
+            <th height="50">Tarefa</th>
             <th>Email</th>
             <th>Data</th>
+            <th onfocus="this">Prazo</th>
             <th>Ações</th>
         </tr>
         {% for dado in dados %}
@@ -22,6 +23,7 @@
                 <td>{{ dado.content }}</td>
                 <td>{{ dado.email}}</td>
                  <td>{{ dado.date_created.date() }}</td>
+                <td height="100"> {{dado.prazo}} </td>
                 <td>
 
                     <button><a href="/delete/{{dado.id}}">Apagar</a>
@@ -42,7 +44,10 @@
             <br>
             <span>Email</span>
              <input type="email" name="email" id="email">
-            <input type="submit" style="align-content: center" value="Add Task">
+            <br>
+            <span>Prazo</span>
+             <input type="datetime-local" name="prazo" id="prazo">
+            <input type="submit" style="align-content: center" value="Add Tarefa">
         </form>
     </div>
 </div>
