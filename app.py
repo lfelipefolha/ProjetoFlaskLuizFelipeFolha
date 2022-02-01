@@ -112,7 +112,7 @@ def sendmail(id):
         #através da id são obtidos os dados de tarefa e endereço de email
         task_to_send = Todo.query.filter_by ( id = id ).first ()
         recipients = task_to_send.email #destinatário
-        body = (str(task_to_send.content) + "\n \n Frase do dia: " +  str(frase) + "\n\n Prazo:  " + str(task_to_send.prazo) )  #tarefa
+        body = (str(task_to_send.content)+ "\nPrazo:  " + str(task_to_send.prazo)  + "\nFrase do dia: " +  str(frase) )  #tarefa
 
         #aqui é realizada a definição do email a ser enviado
         msg = Message(subject="Projeto de organização de tarefas",
